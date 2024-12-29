@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Items</title>
+</head>
+<body>
+    <!-- VARIABLES -->
+     
+    <h4>Cart Items</h4>
+    <button onclick="showCart();">Show Cart</button>
+    <button onclick="addItems();">Add to cart</button>
+    <button onclick="add2();">Add +2</button>
+    <button onclick="add3();">Add +3</button>
+    <button onclick="resetCart();">Reset</button>
+    <button onclick="remove();">Remove from Cart</button>
+    <button onclick="remove2();">Remove -2</button>
+
+    <script type="text/javascript">
+        console.log('Content has been loaded.');
+
+        let cartVal = 0;
+        function showCart() {
+            console.log('Cart Quantity: ' + cartVal);
+        }
+        function addItems() {
+            if(cartVal < 10) {
+                cartVal++; 
+                console.log('Cart Quantity: ' + cartVal);
+            }
+            else {
+                console.log('Cart is full');
+            }
+        }
+        function add2() {
+            if(cartVal < 10) {
+            cartVal = cartVal + 2;
+            console.log('Cart Quantity: ' + cartVal);
+            }
+            else {
+                console.log('Cart is full');
+            }
+        }
+        function add3() {
+            if(cartVal < 10) {
+            cartVal = cartVal + 3;
+            console.log('Cart Quantity: ' + cartVal);
+            }
+            else {
+                console.log('Cart is full');
+            }
+        }
+        function resetCart() {
+            cartVal = 0;
+            console.log('Cart was reset.');
+            console.log('Cart Quantity: ' + cartVal);
+        }
+        function remove() {
+            if(cartVal > 0) {
+            cartVal--;
+            console.log('Cart Quantity: ' + cartVal);
+            }
+            else {
+                console.log('Not enough items in the cart');
+            }
+        }
+        function remove2() {
+            if(cartVal > 0) {
+            cartVal -= 2;
+            console.log('Cart Quantity: ' + cartVal);
+            }
+            else {
+                console.log('Not enough items in the cart');
+            }
+        }
+    </script>
+</body>
+</html>
