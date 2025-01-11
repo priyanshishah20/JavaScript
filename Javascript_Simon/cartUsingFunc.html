@@ -17,36 +17,45 @@
     <button onclick="remove(1);">Remove from Cart</button>
     <button onclick="remove(2);">Remove -2</button>
 
+    <p id="cartData"></p>
+
     <script type="text/javascript">
-        console.log('Content has been loaded.');
+        const dataElem = document.querySelector('#cartData');
 
         // cart value should not be more than 10, 
         let cartVal = 0;
 
         function showCart() {
             console.log('Cart Quantity: ' + cartVal);
+            dataElem.innerHTML = `Cart Quantity: ${cartVal}`;
         }
         function updateCart(value) {
             if(cartVal + value <= 10) {
                 cartVal += value;
-                console.log('Cart Quantity: ' + cartVal);
+                //console.log('Cart Quantity: ' + cartVal);
+                dataElem.innerHTML = `Cart Quantity: ${cartVal}`;
             }
             else {
-                console.log('Cart is full');
+                //console.log('Cart is full');
+                dataElem.innerHTML = `Cart is full`;
             }
         }
         function resetCart() {
             cartVal = 0;
-            console.log('Cart was reset.');
-            console.log('Cart Quantity: ' + cartVal);
+            // console.log('Cart was reset.');
+            // console.log('Cart Quantity: ' + cartVal);
+            dataElem.innerHTML = `Cart was reset.
+            Cart Quantity: ${cartVal}`;
         }
         function remove(val) {
             if(cartVal - val >= 0) {
             cartVal -= val;
-            console.log('Cart Quantity: ' + cartVal);
+            //console.log('Cart Quantity: ' + cartVal);
+            dataElem.innerHTML = `Cart Quantity: ${cartVal}`;
             }
             else {
-                console.log('Not enough items in the cart');
+                //console.log('Not enough items in the cart');
+                dataElem.innerHTML = `Not enough items in the cart`;
             }
         }
     </script>
