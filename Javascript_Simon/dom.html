@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Object Model</title>
+</head>
+
+<body>
+    <button>Hello</button>
+    <button class="js-button">Hello</button>
+
+    <div>
+        <h6>Task 1</h6>
+        <p>YouTube Subscribe Button</p>
+        <button class="sub-button" onclick="subscribe();">Subscribe</button>
+    </div>
+
+    <div>
+        <h6>Task 2</h6>
+        <p>Rock Paper Scissor</p>
+        <a href="rpsUsingObjectLocalStorage.html" target="_blank" onclick="">Click here</a>
+    </div>
+
+    <div>
+        <h6>Task 3</h6>
+        <p>Amazon Shippng Calculator</p>
+        <p>Orders under $40 will charge extra $10 shipping</p>
+        <p>Orders above $40 will charge $0 shipping</p>
+        <input type="number" id="val" placeholder="Enter value" onkeydown="handleKey(event)">
+        <button id="cal" onclick="calculate();">Calculate</button>
+        <p id="total-val"></p>
+    </div>
+
+    <script>
+        console.log(document.title);
+        document.title = 'Changed Title';
+        console.log(document.title);
+
+        console.log(document.body);
+        console.log(typeof document.body);
+
+        console.log(document.body.innerHTML); // this will show all the html element which is present inside the body element
+        //document.body.innerHTML = 'DOM'; // this will replace all the html inside body with the text DOM
+
+        console.log(document.querySelector('button')); // this string tells js which html element to get quertselector. this will get the first button element from the page and put it insde a js
+
+        document.querySelector('button').innerHTML = 'Changed'; // content will be changed inside button element.
+
+        // Task 1
+        const jsElem = document.querySelector('.js-button'); //can also crerate variable
+        console.log(jsElem);
+
+        const subElem = document.querySelector('.sub-button');
+        function subscribe() {
+            if (subElem.innerText === 'Subscribe') {
+                subElem.innerText = 'Subscribed';
+            }
+            else {
+                subElem.innerText = 'Subscribe';
+            }
+        }
+
+        // Task 3
+        function calculate() {
+            const ipElem = document.querySelector('#val');
+            const calElem = document.querySelector('#cal');
+            const totalElem = document.querySelector('#total-val');
+            let val = Number(ipElem.value); // whenever we get a value it will be string
+            // let val = parseInt(ipElem.value); // approach 2
+
+            if (val < 40) {
+                val = val + 10;
+            }
+            totalElem.innerHTML = `$${val}`;
+        }
+        // by pressing enter on keyboard, we can still calculate
+        function handleKey(event) {
+            if (event.key === 'Enter') {
+                calculate();
+            }
+        }
+
+        console.log('25' - 10); // 15
+        console.log('25' + 10); // 2510
+    </script>
+</body>
+
+</html>
