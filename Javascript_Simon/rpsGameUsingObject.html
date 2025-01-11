@@ -87,8 +87,6 @@
                 else if (Computer === 'Scissor') {
                     result = 'You Won';
                 }
-                // val.innerText = `Computer: ${Computer}. User: Rock. ${result}.
-                // Wins: ${score.wins}, Loss: ${score.loss}, Tie: ${score.tie}`;
             }
             
             //Paper
@@ -102,8 +100,6 @@
             else if (Computer === 'Scissor') {
                 result = 'You Lose';
             }
-            // val.innerText = `Computer: ${Computer}. User: Paper. ${result}.
-            // Wins: ${score.wins}, Loss: ${score.loss}, Tie: ${score.tie}`;
             }
 
             //Scissor
@@ -130,7 +126,7 @@
             else if(result === 'Tie') {
                 score.tie += 1;
             }
-            val.innerText = `Computer: ${Computer}. User: Scissor. ${result}.
+            val.innerText = `Computer: ${Computer}. User: ${playerMove}. ${result}.
             Wins: ${score.wins}, Loss: ${score.loss}, Tie: ${score.tie}`;
         }
 
