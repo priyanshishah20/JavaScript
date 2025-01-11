@@ -12,25 +12,40 @@
     <button class="js-button">Hello</button>
 
     <div>
-        <h6>Task 1</h6>
+        <h4>Task 1</h4>
         <p>YouTube Subscribe Button</p>
         <button class="sub-button" onclick="subscribe();">Subscribe</button>
     </div>
 
     <div>
-        <h6>Task 2</h6>
+        <h4>Task 2</h4>
         <p>Rock Paper Scissor</p>
         <a href="rpsUsingObjectLocalStorage.html" target="_blank" onclick="">Click here</a>
     </div>
 
     <div>
-        <h6>Task 3</h6>
+        <h4>Task 3</h4>
         <p>Amazon Shippng Calculator</p>
         <p>Orders under $40 will charge extra $10 shipping</p>
         <p>Orders above $40 will charge $0 shipping</p>
         <input type="number" id="val" placeholder="Enter value" onkeydown="handleKey(event)">
         <button id="cal" onclick="calculate();">Calculate</button>
         <p id="total-val"></p>
+    </div>
+
+    <div>
+        <h4>Task 4</h4>
+        <button class="head" onclick="document.querySelector('#ht-val').innerHTML = 'You chose: Head';">Head</button>
+        <button class="tail" onclick="document.querySelector('#ht-val').innerHTML = 'You chose: Tail';">Tail</button>
+        <p id="ht-val"></p>
+    </div>
+
+    <div>
+        <h4>Task 5</h4>
+        <p>Enter Name</p>
+        <input type="text" id="text" placeholder="Enter text" onkeyup="handleKeyA(event)">
+        <button id="calText" onclick="TextName();">Submit</button>
+        <p id="tval"></p>
     </div>
 
     <script>
@@ -67,13 +82,13 @@
             const ipElem = document.querySelector('#val');
             const calElem = document.querySelector('#cal');
             const totalElem = document.querySelector('#total-val');
-            let val = Number(ipElem.value); // whenever we get a value it will be string
+            let val = Number(ipElem.value) * 100; // whenever we get a value it will be string
             // let val = parseInt(ipElem.value); // approach 2
 
-            if (val < 40) {
-                val = val + 10;
+            if (val < 4000) {
+                val = val + 1000;
             }
-            totalElem.innerHTML = `$${val}`;
+            totalElem.innerHTML = `$${(val/100)}`;
         }
         // by pressing enter on keyboard, we can still calculate
         function handleKey(event) {
@@ -84,6 +99,18 @@
 
         console.log('25' - 10); // 15
         console.log('25' + 10); // 2510
+
+        // Task 5
+        const TextEle = document.querySelector('#text');
+        const tValEle = document.querySelector('#tval');
+
+        function TextName() {   
+            const name = TextEle.value;
+            tValEle.innerHTML = `Your Name is ${name}`;
+        }
+        function handleKeyA(event) {
+            tValEle.innerHTML = TextEle.value;
+        }
     </script>
 </body>
 
