@@ -143,7 +143,7 @@
            // localStorage.setItem('message', 'hello'); // just an example
             localStorage.setItem('score', JSON.stringify(score)); // we cannot write only score as it is a number and json takes only string
 
-            val.innerText = `Computer: ${Computer}. User: Scissor. ${result}.
+            val.innerText = `Computer: ${Computer}. User: ${playerMove}. ${result}.
             Wins: ${score.wins}, Loss: ${score.loss}, Tie: ${score.tie}`;
         }
 
