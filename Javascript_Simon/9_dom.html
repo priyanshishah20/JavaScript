@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Object Model</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .fw-bold{
+            font-weight: bold;
+            /* font-size: 1.1rem; */
+        }
+        .sub-button{
+            cursor: pointer;
+            background: #1a1c1e;
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            border:none;
+        }
+        .is-sub{
+            background: #aaa;
+            color: #1a1c1e;
+        }
+        .cal{
+            cursor: pointer;
+            background: green;
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
+            border: none;
+        }
+        input{
+            padding: 0.35rem;
+            border: 1px solid #909090;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <button>Hello</button>
+    <button class="js-button">Hello</button>
+
+    <div>
+        <h3>Task 1</h3>
+        <p class="fw-bold">YouTube Subscribe Button</p>
+        <button class="sub-button" onclick="subscribe();">Subscribe</button>
+    </div>
+
+    <div>
+        <h3>Task 2</h3>
+        <p class="fw-bold">Rock Paper Scissor</p>
+        <a href="rpsUsingObjectLocalStorage.html" target="_blank" onclick="">Click here</a>
+    </div>
+
+    <div>
+        <h3>Task 3</h3>
+        <p class="fw-bold">Amazon Shippng Calculator</p>
+        <p>Orders under $40 will charge extra $10 shipping</p>
+        <p>Orders above $40 will charge $0 shipping</p>
+        <input type="number" id="val" placeholder="Enter value" onkeydown="handleKey(event)">
+        <button id="cal" class="cal" onclick="calculate();">Calculate</button>
+        <p id="total-val"></p>
+    </div>
+
+    <div>
+        <h3>Task 4</h3>
+        <p class="fw-bold">Head/Tail</p>
+        <button class="head sub-button" onclick="document.querySelector('#ht-val').innerHTML = 'You chose: Head';">Head</button>
+        <button class="tail sub-button" onclick="document.querySelector('#ht-val').innerHTML = 'You chose: Tail';">Tail</button>
+        <p id="ht-val"></p>
+    </div>
+
+    <div>
+        <h3>Task 5</h3>
+        <p class="fw-bold">Enter Name</p>
+        <input type="text" id="text" placeholder="Enter text" onkeyup="handleKeyA(event)">
+        <button id="calText" class="cal" onclick="TextName();">Submit</button>
+        <p id="tval"></p>
+    </div>
+
+    <script>
+        console.log(document.title);
+        document.title = 'Changed Title';
+        console.log(document.title);
+
+        console.log(document.body);
+        console.log(typeof document.body);
+
+        console.log(document.body.innerHTML); // this will show all the html element which is present inside the body element
+        //document.body.innerHTML = 'DOM'; // this will replace all the html inside body with the text DOM
+
+        console.log(document.querySelector('button')); // this string tells js which html element to get quertselector. this will get the first button element from the page and put it insde a js
+
+        document.querySelector('button').innerHTML = 'Changed'; // content will be changed inside button element.
+
+        // Task 1
+        const jsElem = document.querySelector('.js-button'); //can also crerate variable
+        console.log(jsElem);
+
+        const subElem = document.querySelector('.sub-button');
+        function subscribe() {
+            if (subElem.innerText === 'Subscribe') {
+                subElem.innerText = 'Subscribed';
+                subElem.classList.add('is-sub');
+            }
+            else {
+                subElem.innerText = 'Subscribe';
+                subElem.classList.remove('is-sub');
+            }
+        }
+
+        // Task 3
+        function calculate() {
+            const ipElem = document.querySelector('#val');
+            const calElem = document.querySelector('#cal');
+            const totalElem = document.querySelector('#total-val');
+            let val = Number(ipElem.value) * 100; // whenever we get a value it will be string
+            // let val = parseInt(ipElem.value); // approach 2
+
+            if (val < 4000) {
+                val = val + 1000;
+            }
+            totalElem.innerHTML = `$${(val/100)}`;
+        }
+        // by pressing enter on keyboard, we can still calculate
+        function handleKey(event) {
+            if (event.key === 'Enter') {
+                calculate();
+            }
+        }
+
+        console.log('25' - 10); // 15
+        console.log('25' + 10); // 2510
+
+        // Task 5
+        const TextEle = document.querySelector('#text');
+        const tValEle = document.querySelector('#tval');
+
+        function TextName() {   
+            const name = TextEle.value;
+            tValEle.innerHTML = `Your Name is ${name}`;
+        }
+        function handleKeyA(event) {
+            tValEle.innerHTML = TextEle.value;
+        }
+    </script>
+</body>
+
+</html>

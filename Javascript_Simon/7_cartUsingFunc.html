@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Items</title>
+</head>
+<body>
+    <!-- VARIABLES -->
+     
+    <h4>Cart Items</h4>
+    <button onclick="showCart();">Show Cart</button>
+    <button onclick="updateCart(1);">Add to cart</button>
+    <button onclick="updateCart(2);">Add +2</button>
+    <button onclick="updateCart(3);">Add +3</button>
+    <button onclick="resetCart();">Reset</button>
+    <button onclick="remove(1);">Remove from Cart</button>
+    <button onclick="remove(2);">Remove -2</button>
+
+    <p id="cartData"></p>
+
+    <script type="text/javascript">
+        const dataElem = document.querySelector('#cartData');
+
+        // cart value should not be more than 10, 
+        let cartVal = 0;
+
+        function showCart() {
+            console.log('Cart Quantity: ' + cartVal);
+            dataElem.innerHTML = `Cart Quantity: ${cartVal}`;
+        }
+        function updateCart(value) {
+            if(cartVal + value <= 10) {
+                cartVal += value;
+                //console.log('Cart Quantity: ' + cartVal);
+                dataElem.innerHTML = `Cart Quantity: ${cartVal}`;
+            }
+            else {
+                //console.log('Cart is full');
+                dataElem.innerHTML = `Cart is full`;
+            }
+        }
+        function resetCart() {
+            cartVal = 0;
+            // console.log('Cart was reset.');
+            // console.log('Cart Quantity: ' + cartVal);
+            dataElem.innerHTML = `Cart was reset.
+            Cart Quantity: ${cartVal}`;
+        }
+        function remove(val) {
+            if(cartVal - val >= 0) {
+            cartVal -= val;
+            //console.log('Cart Quantity: ' + cartVal);
+            dataElem.innerHTML = `Cart Quantity: ${cartVal}`;
+            }
+            else {
+                //console.log('Not enough items in the cart');
+                dataElem.innerHTML = `Not enough items in the cart`;
+            }
+        }
+    </script>
+</body>
+</html>

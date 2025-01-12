@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object</title>
+</head>
+<body>
+    <p>Oject? An object let us (group & use) multiple values together. Inside an object, we can store any type f value. It includes boolean, strings, numbers and other objects</p>
+    <p>Objects themselves are also values.</p>
+    <p>why objects? make our code more organized</p>
+    <p>Bracket notation: let us use properties that dont work with dot notation.</p>
+    <p>Which notation to use? use dot notation by default as it is shorter and easier to read. But if we want property that dont use dot notation then use bracket notation.</p>
+
+    <p>JSON ? JavcaScript Object Notation</p>
+    <p>Is basically a syntax, similar syntax to javascript notation but has less features</p>
+    <p>In JSON, all properties and strings ust use double quotes. json does not support single quotes also not support functions</p>
+    <p>why JSON? JavcaScript object only makes sense in JS. JSON syntax can be understood by almost every other programming languages. so, JSON syntax is more universal.</p>
+    <p>We use json - when we send data between computers, when we store data.</p>
+    <p>json.stringify() (it actually converts it into string) - stringify is a method of the json object. so its a function that is saved inside method. Inside bracket we add json object to convert json.</p>
+    <script>
+        const details = {
+            name: 'MS Dhoni',
+            age: 43,
+            profession: 'Cricketer'
+        };
+        console.log(details);
+        console.log(details.name);
+
+        details.profession = 'Indian Cricketer';
+        console.log(details);
+
+        // will add new property and value
+        details.spouse = 'Sakshi Dhoni';
+        details.bat = 'Right-handed';
+        console.log(details);
+
+        // to delete property
+        delete details.bat;
+        console.log(details);
+
+        console.log(typeof details);
+
+        // dot notation
+        console.log(details.name);
+
+        // bracket notation
+        console.log(details['name']);
+        
+        //this will give error as it will calculate like minus sign
+        console.log(details.title-name); // (referencerror or NaN)
+        // this will give undefined as value is not defined.
+        console.log(details['title-name']);
+        
+        // details.title-name = 'Mr.'; this will give error
+
+        // this will get added on details object
+        details['title-name'] = 'Mr.'; // bracket is optional
+        console.log(details);
+
+        // Objects themselves are also values.
+        const movie = {
+            title: 'Chennai Express',
+            genre: {
+                'Comedy': 'Tarak Mehta ka Oolta Chashma', 
+                Action: 'Race', 
+                ['Thriller']: 'Parasite'},
+            fun: function movieFun() { 
+                console.log('Function inside object.');
+            }
+        }
+        console.log(movie);
+        console.log(movie.genre.Comedy); // dot
+        console.log(movie.genre['Comedy']); // bracket
+        console.log(movie["genre"]['Comedy']); // bracket
+        movie.fun();
+
+        // JS to JSON Object
+        console.log(JSON.stringify(movie)); // function will not get displayed as json does not support function
+        console.log(typeof JSON.stringify(movie));
+
+        // JSON to JS
+        console.log(JSON.parse(JSON.stringify(movie)));
+
+        // Auto-Boxing
+        console.log('Hello Bye'.length);
+        console.log('Hello Bye'.toUpperCase());
+
+        // References
+        const obj1 = {
+            message: 'Today is a good day.'
+        }
+        const obj2 = obj1; // pointing to same reference, not creating another memory
+        console.log(obj1 === obj2); // true - same reference
+        const obj3 = {
+            message: 'Today is a good day.',
+            price: 800
+        }
+        console.log(obj1 === obj3); // false - comparing the reference, not value inside
+
+        // Shortcut (Destructuring, shorthand property, shrthand method)
+
+        // 1. destructing - easier way to take properties out of an object
+        // below two codes are same
+        //const message = obj3.message;
+        const {message, price} = obj3; // shortcut
+        console.log(message);
+        console.log(price);
+
+        // 2. Shorthand Property - creating new object and assigning previous object 
+        const obj4 = {
+            // both are same
+            // message: message
+            message // shortcut - if the property and variable nae are the same, we can write once
+        }
+        console.log(obj4);
+
+        // 3. Shorthand Method
+        const obj5 = {
+            message,
+            // both are same
+            // method: function funNew() {
+            //     console.log('Shorthand Method');
+            // }
+            method() {
+                console.log('Shorthand Method'); // shortcut
+            }
+        }
+        obj5.method();
+    </script>
+</body>
+</html>

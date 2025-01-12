@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+</head>
+
+<body>
+    <!-- IF-ELSE and BOOLEANS-->
+     
+    <p id="time"></p>
+    <p id="sts"></p>
+
+    <script>
+        let name = 'Priyanshi';
+        let result = '';
+        let time = new Date();
+        let hour = time.getHours();
+        console.log(hour);
+
+        document.getElementById('time').innerText = time;
+
+        if (hour >= 6 && hour <= 12) {
+            console.log('Good Morning ' + name + '!');
+            result = 'Good Morning ' + name + '!';
+        }
+        else if (hour >= 13 && hour <= 17) {
+            console.log('Good Afternoon ' + name + '!');
+            result = 'Good Afternoon ' + name + '!';
+        }
+        else {
+            console.log('Good Night ' + name + '!');
+            result = 'Good Night ' + name + '!';
+        }
+        document.getElementById('sts').innerText = result;
+
+
+        // Amusement Park - if else condition
+        //if it is holiday, no discount
+        let age = 68;
+        const isHoliday = false;
+        
+        //if ((age > 0 && age <= 6 || age >= 65) && !isHoliday)
+        if (isHoliday) {
+            if (age > 0 && age <= 6 || age >= 65) { 
+                console.log('Discount');
+            }
+             else 
+             console.log('No Discount');
+        }
+        else {
+            console.log('No Discount');
+        }
+    </script>
+</body>
+
+</html>

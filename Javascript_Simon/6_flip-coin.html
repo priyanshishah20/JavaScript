@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Coin</title>
+    <style>
+        *, *::before, *::after{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: #000;
+        }
+        div{
+            margin: 1rem;
+        }
+        div button {
+            background: #333;
+            color: #f5f5f5;
+            font-size: 1.2rem;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            margin-inline: 0.2rem;
+            cursor: pointer;
+        }
+        h2, p {
+            color: #f5f5f5;
+            margin-block: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- IF-ELSE and BOOLEANS-->
+     
+    <div>
+        <button onclick="generateNo();">Flip Coin</button>
+        <p id="coin-sts"></p>
+        <p id="final-result"></p>
+    </div>
+    <script>
+        function generateNo() {  
+        let coin = document.getElementById('coin-sts');
+        let guessR = document.getElementById('final-result');
+        let value1 = Math.random();
+        console.log(value1);
+        let result = '';
+        let Fresult = '';
+        let guess = 'Head';
+
+        // if(value1 < 0.5) {
+        //     result = 'Head';
+        // }
+        // else {
+        //     result = 'Tail';
+        // }
+
+         // ternary opereator
+        result = (value1 < 0.5 ? 'Head' : 'Tail');
+        coin.innerText = `Computer: ${result} \n You: ${guess}`;
+       
+        Fresult = (result === guess ? 'Your guess was right, you Won!' : 'Uh uh, you Lose!');
+        guessR.innerText = `${Fresult}`;
+    }
+    </script>
+</body>
+</html>
