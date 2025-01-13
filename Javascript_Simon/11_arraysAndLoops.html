@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays and Loopps</title>
+</head>
+<body>
+    <p>Open Console Window</p>
+
+    <script>
+        // Arrays
+        const myArr = [10, 20, 30];
+        console.log(myArr);
+        console.log(myArr[1]); // to get a specific value in an array []
+        
+        myArr[0] = 100;
+        console.log(myArr);
+        console.log(typeof myArr);
+        console.log(Array.isArray(myArr));
+        console.log(myArr.length);
+
+        myArr.push('46'); // add a value at the end of the array
+        myArr.push('ab');
+        console.log(myArr);
+
+        myArr.pop(); // remove a value from the end of the array
+        console.log(myArr);
+
+        myArr.splice(1, 1); // 1-defines from which index, 2-defines how many nos to be removed
+        console.log(myArr); // will remove from index 1 and show the remaining o/p
+
+        // Loops
+        // while
+        let i=1
+        while(i<=5) {
+            console.log(i);
+            i++;
+        }
+        
+        //for
+        for(let i=1; i<=5; i++) {
+            console.log(i);
+        }
+
+        const Todo = ['Breakfast', 'Lunch', 'Dinner'];
+
+        for(let i=0; i<=Todo.length-1; i++) {
+            console.log(Todo[i]);
+        }
+
+        const num1 = [10,2,30,4];
+        let total = 0;
+        for(let i=0; i<num1.length; i++) {
+            total = total + num1[i];
+            //console.log(total);
+        }
+        console.log(total);
+
+        let total1 = [];
+        for(let i=0; i<num1.length; i++) {
+            // total1.push(num1[i]); // copy of num1 array
+            total1.push(num1[i] * 2); // o/p will be doubled
+            // console.log(total1);
+        }
+        console.log(total1);
+
+        const Todo1 = ['Breakfast', 'Lunch', 'Dinner'];
+        let todohtml = '';
+
+        for(let i=0; i<=Todo1.length-1; i++) {
+            console.log(Todo1[i]);
+
+            for(let i=0; i<Todo1.length; i++) {
+                const todo = Todo1[i];
+                const html = `<p>${todo}</p>`;
+                console.log(html);
+            }
+        }
+    </script>
+</body>
+</html>
