@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML, CSS and JavaScript</title>
+    <style>
+        button{
+            border: none;
+            padding: 0.5rem 1rem;
+            /* color: #fff; */
+        }
+        .addbtn{
+            background-color: rgb(255, 216, 20);
+            border-radius: 20px;
+            padding-inline: 3rem;
+        }
+        .reqbtn{
+            background-color: #000;
+            color: #fff;
+            border-radius: 6px;
+            margin-right: 0.5rem;
+        }
+        .js-button, .is-toggled{
+            background-color: rgb(230, 230, 230);
+            color: #000;
+            border-radius: 6px;
+        }
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <p>Task 1</p>
+        <button class="addbtn">Add to Cart</button>
+    </div>
+
+    <div>
+        <p>Task 2</p>
+        <button class="reqbtn">Request now</button>
+        <button class="js-button">Schedule for later</button>
+    </div>
+
+    <div>
+        <p>Task 4</p>
+        <button class="reqbtn game-btn" onclick="onOff('.game-btn');">Gaming</button>
+        <button class="reqbtn music-btn" onclick="onOff('.music-btn');">Music</button>
+        <button class="reqbtn wer-btn" onclick="onOff('.wer-btn');">Tech</button>
+    </div>
+
+<div>
+    <p>Task 6</p>
+    <p class="fw-bold">Amazon Shippng Calculator</p>
+        <p>Orders under $40 will charge extra $10 shipping</p>
+        <p>Orders above $40 will charge $0 shipping</p>
+        <input type="number" id="val" placeholder="Enter value" onkeydown="handleKey(event)">
+        <button id="cal" class="cal" onclick="calculate();">Calculate</button>
+        <p id="total-val"></p>
+</div>
+
+
+    <script>
+        const jsElem = document.querySelector('.js-button');
+        
+        // Task 3
+        if(!console.log(jsElem.classList.contains('js-button'))) {
+            console.log('js-button class is present and returned as true');
+        }
+        
+        // Task 4
+        function onOff(val){
+            const gameElem = document.querySelector(val);
+            // const gameElem = document.querySelector(`.${val}`); // Approach2
+            if(gameElem.classList.contains('is-toggled')) {
+                gameElem.classList.remove('is-toggled');
+            }
+            else{ 
+                turnOnOff();
+                gameElem.classList.add('is-toggled');
+            }
+        }
+
+        function turnOnOff() {
+            const prevElem = document.querySelector('.is-toggled');
+            if(prevElem) {
+                prevElem.classList.remove('is-toggled');
+            }
+        }
+        // function onOff2(){
+        //     const gameElem = document.querySelector('.music-btn');
+        //     if(gameElem.classList.contains('is-toggled')) {
+        //         gameElem.classList.remove('is-toggled');
+        //     }
+        //     else{ 
+        //         gameElem.classList.add('is-toggled');
+        //     }
+        // }
+        // function onOff3(){
+        //     const gameElem = document.querySelector('.wer-btn');
+        //     if(gameElem.classList.contains('is-toggled')) {
+        //         gameElem.classList.remove('is-toggled');
+        //     }
+        //     else{ 
+        //         gameElem.classList.add('is-toggled');
+        //     }
+        // }
+
+         // Task 6
+         function calculate() {
+            const ipElem = document.querySelector('#val');
+            const calElem = document.querySelector('#cal');
+            const totalElem = document.querySelector('#total-val');
+            let val = Number(ipElem.value) * 100; // whenever we get a value it will be string
+            // let val = parseInt(ipElem.value); // approach 2
+
+            if (val < 4000 && val > 0) {
+                val = val + 1000;
+                totalElem.innerHTML = `$${(val/100)}`;
+                totalElem.classList.remove('error');
+            }
+            else if(val > 4000){
+                totalElem.innerHTML = `$${(val/100)}`;
+                totalElem.classList.remove('error');
+            }
+            else{
+                totalElem.classList.add('error');
+                totalElem.innerHTML = `Error: cost cannot be less than $0.`;
+            }
+        }
+        // by pressing enter on keyboard, we can still calculate
+        function handleKey(event) {
+            if (event.key === 'Enter') {
+                calculate();
+            }
+        }
+    </script>
+</body>
+</html>
