@@ -34,6 +34,3 @@ function add1() {
     ipElem.value = ''; // reset the text in input
     renderTodo();
 }
-function deleteElem() {
-    
-}
