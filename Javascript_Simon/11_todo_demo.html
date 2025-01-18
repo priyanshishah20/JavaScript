@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .wrapper {
+            padding: 1rem;
+        }
+
+        input {
+            padding: 0.4rem;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 0.4rem 0.8rem;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .addbtn {
+            background-color: green;
+            border: 1px solid green;
+        }
+
+        .deletebtn {
+            background-color: red;
+            border: 1px solid red;
+        }
+
+        .main-div {
+            display: grid;
+            grid-template-columns: 200px 200px 100px;
+            gap: 0.5rem;
+            margin-block: 0.5rem;
+            align-items: center;
+        }
+
+        #error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="main-div">
+            <input type="text" placeholder="ToDo Name" id="todoVal">
+            <input type="date" id="todoDate">
+            <button onclick="todoList();" class="addbtn">Add</button>
+            <p id="error"></p>
+        </div>
+
+        <div class="main-div" id="todoData"></div>
+    </div>
+
+    <script>
+        const textElem = document.getElementById('todoVal');
+        const dateElem = document.getElementById('todoDate');
+        const listElem = document.getElementById('todoData');
+
+        const obj1 = [];
+
+        function renderTodo() {
+            listElem.innerHTML = '';
+            for (let i = 0; i < obj1.length; i++) {
+                const { name, date } = obj1[i];
+
+                const retHTML = `<p>${name}</p> <p>${date}</p> <button class="deletebtn" onclick="deleteList(${i});">Delete</button>`;
+                listElem.innerHTML += retHTML;
+            }
+
+        }
+        function todoList() {
+            const name = textElem.value.trim();
+            const date = dateElem.value.trim();
+
+            if (!name || !date) {
+                document.getElementById('error').innerHTML = 'Please Enter valid ToDo data.';
+                return;
+            }
+            document.getElementById('error').innerHTML = '';
+
+            obj1.push({ name, date });
+            textElem.value = '';
+            dateElem.value = '';
+
+            renderTodo();
+        }
+        function deleteList(index) {
+            obj1.splice(index, 1);
+            renderTodo();
+        }
+    </script>
+</body>
+</html>
