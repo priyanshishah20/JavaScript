@@ -71,12 +71,12 @@
         const dateElem = document.getElementById('todoDate');
         const listElem = document.getElementById('todoData');
 
-        const obj1 = [];
+        const arr1 = [];
 
         function renderTodo() {
             listElem.innerHTML = '';
-            for (let i = 0; i < obj1.length; i++) {
-                const { name, date } = obj1[i];
+            for (let i = 0; i < arr1.length; i++) {
+                const { name, date } = arr1[i];
 
                 const retHTML = `<p>${name}</p> <p>${date}</p> <button class="deletebtn" onclick="deleteList(${i});">Delete</button>`;
                 listElem.innerHTML += retHTML;
@@ -93,14 +93,14 @@
             }
             document.getElementById('error').innerHTML = '';
 
-            obj1.push({ name, date });
+            arr1.push({ name, date });
             textElem.value = '';
             dateElem.value = '';
 
             renderTodo();
         }
         function deleteList(index) {
-            obj1.splice(index, 1);
+            arr1.splice(index, 1);
             renderTodo();
         }
     </script>
