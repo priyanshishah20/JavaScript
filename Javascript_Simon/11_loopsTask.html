@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loops Task</title>
+</head>
+<body>
+    
+    <script>
+        // Challenge 1
+        for(let i=1; i<=20; i++) {
+            if(i%3 === 0 && i%5 === 0) {
+                console.log('FizzBuzz');
+                continue;
+            }        
+            else if(i%3 === 0) {
+                console.log('Fizz');
+                continue;
+            }
+            else if(i%5 === 0) {
+                console.log('Buzz');
+                continue;
+            }
+            else
+            console.log(i);
+        }
+
+        // Challenge 2
+        function findIndex(array, word) {
+            for (let i = 0; i < array.length; i++) {
+                if (array[i] === word) {
+                    return i
+                }
+            }
+            return -1;
+        } 
+
+        function unique(array) {
+            let result = [];
+            for (let i = 0; i < array.length; i++) {
+                const word = array[i];
+                if(findIndex(result, word) === -1) {
+                    result.push(word);
+                }
+            }
+            return result;
+        } 
+        console.log(unique(['green', 'blue', 'red', 'green']));
+        console.log(unique(['red', 'blue', 'red', 'green']));
+    </script>
+</body>
+</html>
