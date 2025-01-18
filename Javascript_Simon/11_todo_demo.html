@@ -71,13 +71,16 @@
         const dateElem = document.getElementById('todoDate');
         const listElem = document.getElementById('todoData');
 
-        const arr1 = [];
+        const arr1 = JSON.parse(localStorage.getItem('arr1')) || [];
+
+        // to display storage data
+        renderTodo();
 
         function renderTodo() {
             listElem.innerHTML = '';
             for (let i = 0; i < arr1.length; i++) {
                 const { name, date } = arr1[i];
-
+        
                 const retHTML = `<p>${name}</p> <p>${date}</p> <button class="deletebtn" onclick="deleteList(${i});">Delete</button>`;
                 listElem.innerHTML += retHTML;
             }
@@ -94,6 +97,8 @@
             document.getElementById('error').innerHTML = '';
 
             arr1.push({ name, date });
+            savetoStorage();
+
             textElem.value = '';
             dateElem.value = '';
 
@@ -101,7 +106,13 @@
         }
         function deleteList(index) {
             arr1.splice(index, 1);
+            savetoStorage();
+
             renderTodo();
+        }
+        
+        function savetoStorage() {
+            localStorage.setItem('arr1', JSON.stringify(arr1));
         }
     </script>
 </body>
