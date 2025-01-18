@@ -78,12 +78,21 @@
 
         function renderTodo() {
             listElem.innerHTML = '';
-            for (let i = 0; i < arr1.length; i++) {
-                const { name, date } = arr1[i];
+            // forEach
+            arr1.forEach(function(arr1, i) {
+                const { name, date } = arr1;
         
                 const retHTML = `<p>${name}</p> <p>${date}</p> <button class="deletebtn" onclick="deleteList(${i});">Delete</button>`;
                 listElem.innerHTML += retHTML;
-            }
+            });
+
+            // for loop
+            // for (let i = 0; i < arr1.length; i++) {
+            //     const { name, date } = arr1[i];
+        
+            //     const retHTML = `<p>${name}</p> <p>${date}</p> <button class="deletebtn" onclick="deleteList(${i});">Delete</button>`;
+            //     listElem.innerHTML += retHTML;
+            // }
 
         }
         function todoList() {
