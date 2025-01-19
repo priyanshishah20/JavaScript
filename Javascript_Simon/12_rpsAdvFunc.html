@@ -4,23 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RPS Game</title>
     <link rel="stylesheet" href="css/12_rpsAdvFunc.css">
 </head>
 
 <body>
-    <!-- Advanced Functions -->
+    <!-- Advanced Functions and Add Event Listeners-->
 
     <div>
         <h2>Rock Paper Scissor Game</h2>
-        <button onclick="CompVal('Rock');"><img src="images/rock-emoji.png" alt="Rock"></button>
-        <button onclick="CompVal('Paper');"><img src="images/paper-emoji.png" alt="Paper"></button>
-        <button onclick="CompVal('Scissor');"><img src="images/scissor-emoji.png" alt="Scissor"></button>
+        <button class="rock-click"><img src="images/rock-emoji.png" alt="Rock"></button>
+        <button class="paper-click"><img src="images/paper-emoji.png" alt="Paper"></button>
+        <button class="scissor-click"><img src="images/scissor-emoji.png" alt="Scissor"></button>
         <p id="js-op"></p>
         <p id="js-move"></p>
         <p id="js-val"></p>
         <button class="reset" onclick="resetScore();">Reset Score</button>
-        <button class="reset" onclick="autoPlay();">Auto Play</button>
+        <button class="reset stop-play" onclick="autoPlay();">Auto Play</button>
     </div>
 
     <script src="scripts/12_rpsAdvFunc.js"></script>
