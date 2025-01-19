@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Functions</title>
+</head>
+<body>
+    <p>Function? Function is just another type of value, which can be saved inside a variable.</p>
+    <p>Add Event Listener</p>
+    <button id="btnId">Click</button>
+    <script>
+        const advFun = function greeting() {
+            console.log('Hello from function');
+        };
+        console.log(advFun);
+        console.log(typeof advFun);
+        advFun();
+
+        // save a value in an object
+        const obj = {
+            num: 2, 
+            name: 'Pri',
+            fun: function() {
+                console.log('Hi');
+            }
+        }
+        obj.fun();
+
+        // passing a value into a function
+        function display(param) {
+            console.log(param);
+        }
+        display('Value 2');
+
+        // pass a function into another function
+        function run(param) {
+            param();
+        }
+        run(function() {
+            console.log('function inside a function');
+        });
+
+        // setTimeout function will execute after 2 secs
+        // setTimeout(function() {
+        //     console.log('setTimeOut function');
+        //     console.log('setTimeOut function2');
+        // }, 2000);
+
+         console.log('Next'); 
+        // this will execute first as settimeout wont wait for a line to finish beforte going to the net line and this is known as Asynchronous code.
+        // Except this, all other codes are synchronous code. Even function which is preset inside settimeout will execute line by line. 
+
+        // setInterval function will execute after every 2 secs
+        // setInterval(function() {
+        //     console.log('setInterval function');
+        //     console.log('setInterval function2');
+        // }, 2000);
+
+        console.log('Next2');
+
+        // Regular Function
+        const regularFun = function() {
+            console.log('Regular Function');
+        }
+        regularFun();
+
+        // Arrow Function
+        const arrowFun = () => {
+            console.log('Arrow Function');
+        }
+        arrowFun();
+
+        // shortcut for one parameter value
+        const oneParam = val => { // (val)
+            console.log(val + 2);
+        };
+        oneParam(4);
+
+        // shortcut for one line return value
+        const oneLine = () => 2+5; // { return 2+5; };
+        console.log(oneLine());
+
+        const object2 = {
+            method: () => {  // 1
+            },
+            method() { // 2 - shorthand method and easier to read
+            }
+        }
+
+        // Add Event Listener
+        const addElem = document.getElementById('btnId');   
+        addElem.addEventListener('click', () => {
+            console.log('Event clicked');
+        });  
+        const funcEvent = function() {
+            console.log('Event clicked twice');
+        }
+        addElem.addEventListener('click', funcEvent);
+        addElem.removeEventListener('click', funcEvent); // will remove the funcEvent function
+
+        // for Each is mostly preferred for looping the array
+        // foreach will loop through the array and for each of this values, it will save the value in the param and run the function
+        // passing a function into another function
+        [
+            'breakfast', 'wash dishes', 'lunch', 'dinner'
+        ].forEach(function(param, index) {
+            if(param === 'wash dishes') {
+                return; // does the same thing as continue - return statement will end the functn and run the next function (means next iteration)
+            }
+            console.log(param, index);
+        })
+        // so basically, this will take the first value, save it in the param and run the function and so on.
+
+        console.log([1, -3, 5].filter( (value) => {
+            /* if(value >=0) {
+                return true;
+            }
+            else
+            return false;
+            */
+            return value >=0; // shortcut of above code
+        }));
+
+        console.log([1, -2, 0, 5].map( (value) => {
+            return value + 10;
+        }));
+
+        // shortcut of arrow function
+        console.log([1, -2, 0, 5].map( value => value + 10 ));
+    </script>
+</body>
+</html>
