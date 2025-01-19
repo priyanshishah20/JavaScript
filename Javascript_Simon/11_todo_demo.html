@@ -54,12 +54,11 @@
 </head>
 
 <body>
-
     <div class="wrapper">
         <div class="main-div">
             <input type="text" placeholder="ToDo Name" id="todoVal">
             <input type="date" id="todoDate">
-            <button onclick="todoList();" class="addbtn">Add</button>
+            <button class="addbtn">Add</button>
             <p id="error"></p>
         </div>
 
@@ -82,10 +81,19 @@
             arr1.forEach( (arr1, i) => { // regular function replaced by arrow function
                 const { name, date } = arr1;
         
-                const retHTML = `<p>${name}</p> <p>${date}</p> <button class="deletebtn" onclick="deleteList(${i});">Delete</button>`;
+                const retHTML = `<p>${name}</p> <p>${date}</p> <button class="deletebtn" >Delete</button>`;
                 listElem.innerHTML += retHTML;
             });
 
+            // we need to get the index which we want to delete and for that we used forEach
+            document.querySelectorAll('.deletebtn').forEach( (deleteBtn, index) => {
+                deleteBtn.addEventListener('click', () => {
+                    arr1.splice(index, 1);
+                    savetoStorage();
+                    
+                    renderTodo();
+                });
+            });
             // for loop
             // for (let i = 0; i < arr1.length; i++) {
             //     const { name, date } = arr1[i];
@@ -95,6 +103,11 @@
             // }
 
         }
+
+        // add event listener replaced by onclick
+        document.querySelector('.addbtn').addEventListener('click', () => {
+            todoList();
+        })
         function todoList() {
             const name = textElem.value.trim();
             const date = dateElem.value.trim();
@@ -113,12 +126,12 @@
 
             renderTodo();
         }
-        function deleteList(index) {
-            arr1.splice(index, 1);
-            savetoStorage();
+        // function deleteList(index) {
+        //     arr1.splice(index, 1);
+        //     savetoStorage();
 
-            renderTodo();
-        }
+        //     renderTodo();
+        // }
         
         function savetoStorage() {
             localStorage.setItem('arr1', JSON.stringify(arr1));
