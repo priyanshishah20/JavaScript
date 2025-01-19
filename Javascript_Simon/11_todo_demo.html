@@ -79,7 +79,7 @@
         function renderTodo() {
             listElem.innerHTML = '';
             // forEach
-            arr1.forEach(function(arr1, i) {
+            arr1.forEach( (arr1, i) => { // regular function replaced by arrow function
                 const { name, date } = arr1;
         
                 const retHTML = `<p>${name}</p> <p>${date}</p> <button class="deletebtn" onclick="deleteList(${i});">Delete</button>`;
