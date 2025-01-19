@@ -12,6 +12,11 @@ val.innerText = `Wins: ${score.wins}, Loss: ${score.loss}, Tie: ${score.tie}`;
 
 let isAutoPlaying = false;
 let interval;
+
+document.querySelector('.stop-play').addEventListener('click', () => {
+    autoPlay();
+});
+
 function autoPlay() {
     if(!isAutoPlaying) {
         // interval = setInterval( function() => { // regular function
@@ -57,6 +62,13 @@ document.body.addEventListener('keydown', (event) => {
     }
     else if(event.key === 's') {
         scissorEvent();
+    }
+    else if(event.key === 'a') {
+        autoPlay();
+    }
+    else if(event.key === 'Backspace') {
+        resetScore();
+        
     }
     else{
         console.log(event.key);
@@ -137,11 +149,20 @@ function CompVal(playerMove) {
     val.innerText = `Wins: ${score.wins}, Loss: ${score.loss}, Tie: ${score.tie}`;
 }
 
+document.querySelector('.reset-score').addEventListener('click', () => {
+    resetScore();
+})
 function resetScore() {
-    score.wins = 0;
-    score.loss = 0;
-    score.tie = 0;
-
-    localStorage.removeItem('score'); // to remove items
-    val.innerText = 'Your Score have been reset.';
+    const valConfirmed = window.confirm('Are you sure you want to reset the score?');
+    if(valConfirmed) {
+        score.wins = 0;
+        score.loss = 0;
+        score.tie = 0;
+        
+        localStorage.removeItem('score'); // to remove items
+        val.innerText = 'Your Score have been reset.';
+    }
+    else {
+        console.log('hello');
+    }
 }   
