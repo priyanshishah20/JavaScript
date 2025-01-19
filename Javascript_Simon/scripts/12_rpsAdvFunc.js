@@ -7,23 +7,61 @@ const val = document.getElementById('js-val');
 let Computer = '';
 let result = '';
 
+
 val.innerText = `Wins: ${score.wins}, Loss: ${score.loss}, Tie: ${score.tie}`;
 
 let isAutoPlaying = false;
 let interval;
 function autoPlay() {
     if(!isAutoPlaying) {
-        interval = setInterval(function () {
+        // interval = setInterval( function() => { // regular function
+        interval = setInterval( () => { // arrow function 
             const playMove = randomMove();
             CompVal(playMove);
             isAutoPlaying = true;
+            document.querySelector('.stop-play').innerHTML = 'Stop Play';
         }, 2000);
     }
     else{
         clearInterval(interval);
         isAutoPlaying = false;
+        document.querySelector('.stop-play').innerHTML = 'Auto Play';
     }
 }
+
+// used add event listeners instead of onclick
+document.querySelector('.rock-click').addEventListener('click', () => {
+    rockEvent();
+});
+document.querySelector('.paper-click').addEventListener('click', () => {
+    paperEvent();
+});
+document.querySelector('.scissor-click').addEventListener('click', () => {
+    scissorEvent();
+});
+const rockEvent = function() {
+    CompVal('Rock');
+};
+const paperEvent = function() {
+    CompVal('Paper');
+}
+const scissorEvent = function() {
+    CompVal('Scissor');
+}
+document.body.addEventListener('keydown', (event) => {
+    if(event.key === 'r') {
+        rockEvent(); // CompVal('Rock') - we can also directly call the function instead of creating rockEvent function
+    }
+    else if(event.key === 'p') {
+        paperEvent();
+    }
+    else if(event.key === 's') {
+        scissorEvent();
+    }
+    else{
+        console.log(event.key);
+    }
+});
 
 function randomMove() {
     let randomNo = Math.random();
@@ -92,7 +130,6 @@ function CompVal(playerMove) {
         score.tie += 1;
     }
 
-    // localStorage.setItem('message', 'hello'); // just an example
     localStorage.setItem('score', JSON.stringify(score)); // we cannot write only score as it is a number and json takes only string
 
     op.innerHTML = `${result}.`;
