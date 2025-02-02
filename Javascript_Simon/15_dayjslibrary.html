@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day JS</title>
+</head>
+<body>
+    
+    <p>Day JS Library</p>
+
+    <!-- <script src="https://unpkg.com/dayjs@1.11.10/esm/index.js"></script> -->
+    <script type="module">
+        import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+
+        const today = dayjs();
+        console.log(today);
+
+        // 5 days after today
+        const fewdays = today.add(5, 'days');
+        console.log(fewdays.format('MMMM D'));
+
+        // 1 month after today
+        const oneMonth = today.add(1, 'month');
+        console.log(oneMonth.format('MMMM D'));
+
+        // 1 month before today
+        const beforeMonth = today.subtract(1, 'month');
+        console.log(beforeMonth.format('MMMM D'));
+
+        // day of week format
+        console.log(beforeMonth.format('dddd'));
+
+        // return sat or sun
+        function isWeekend(date) {
+            const dayOfWeek = date.format('dddd');
+            if(dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday') {
+                return dayOfWeek;
+            }
+            // else {
+            //     return `${dayOfWeek}, Not a Weekend`;
+            // }
+        }
+        let date = dayjs();
+        console.log(isWeekend(date));
+
+        date = dayjs().add(2, 'days');
+        console.log(isWeekend(date));
+    </script>
+</body>
+</html>
