@@ -1,1 +1,1 @@
-# JavaScript Notes
+# JavaScript Notes, Practice & Projects
