@@ -157,7 +157,7 @@ function higherOrder(val1, val2, callback) {
         else {
             //console.log(res);
             resolve(res);
-           // result(); - result() function is being called immediately after resolve(res), but JavaScript doesn’t wait for .then() to run synchronously after resolve is called        
+            // result(); - result() function is being called immediately after resolve(res), but JavaScript doesn’t wait for .then() to run synchronously after resolve is called        
         }
     });
 }
@@ -166,9 +166,190 @@ function result() {
     console.log('Callback function');
 }
 higherOrder(5, 6)
-.then(function(msg) {
-    console.log('Resolved:', msg);
-    result(); // Now runs after the promise is resolved and .then executes
-}).catch(function(err) {
-    console.error('Rejected', err);
-});
+    .then(function (msg) {
+        console.log('Resolved:', msg);
+        result(); // Now runs after the promise is resolved and .then executes
+    }).catch(function (err) {
+        console.error('Rejected', err);
+    });
+
+// 8. Implement custom methods for promise.resolve() and promise.reject()
+// resolve
+function myResolve(val) {
+    return new Promise(function (resolve, reject) {
+        resolve(val); // resolves the Promise
+    });
+}
+
+myResolve('Resolve - Custom Method')
+    .then(function (result) {
+        console.log(result); // Resolve - Custom Method
+    });
+
+// reject
+function myReject(val) {
+    return new Promise(function (resolve, reject) {
+        reject(val);
+    })
+}
+myReject('Reject - Custom Method')
+    .catch(function (res) {
+        console.log(res);
+    })
+
+// logs the promise object, not the resolve/reject value
+function myRejectOld(val) {
+    return new Promise(function (resolve, reject) {
+        reject(val);
+    })
+}
+console.log(myRejectOld('Reject - Custom Method (old way)')); // logs: Promise {<pending>}
+
+
+// 9. Execute N async tasks in series - one after another
+function awaitFunc(val) {
+    return new Promise(function (resolve, reject) {
+        setTimeout(() => {
+            //console.log('Await function - setTimeOut');   
+            resolve(`Await function - ${val}`);
+            // if above resolve() is never called, the Promise never settles
+        }, 3000);
+    })
+}
+async function asyncFunction(num) {
+    console.log('Async Function Start');
+    for (let i = 0; i < num; i++) {
+        // console.log(i);
+        const result = await awaitFunc(i);
+        console.log(result);
+    }
+    // and the await inside asyncFunction() waits forever and the below line is not executed
+    console.log('Async Function End');
+}
+asyncFunction(4);
+
+
+// 10. Handle N async tasks in parallel and collect results
+function parallelFunc(i) {
+    return new Promise(function (resolve) {
+        const delay = Math.floor(Math.random() * 3000);
+        setTimeout(() => {
+            console.log(`Took ${i} done after ${delay} ms.`);
+            resolve(`${i}`);
+        }, delay);
+    })
+}
+
+async function asyncParallelFunc(num) {
+    const storePormises = [];
+    for (let i = 0; i < num; i++) {
+        storePormises.push(parallelFunc(i)); // create all tasks and push into array
+    }
+    const result = await Promise.all(storePormises); // wait for all
+    console.log("Result:", result);
+    // Tasks finished in random order But Promise.all() keeps the result in the original order (1 to 5)
+}
+asyncParallelFunc(5);
+
+// 11. Process N async tasks in race to pick the fastest one. 
+// same code as 10th question, just replace with Promise.race 
+
+// 12. Recreate setTimeOut() from scratch
+function timeoutFun() {
+    console.log('SetTimeOut Start');
+    setTimeout(() => {
+        console.log('Executed after 2 seconds');
+    }, 2000);
+    console.log('SetTimeOut End');
+}
+timeoutFun();
+
+document.getElementById('click-btn').addEventListener('click', function () {
+    document.getElementById('text-display').textContent = `Button Clicked!`;
+    console.log('Custom setTimeOut called');
+    customsetTimeout(() => { // setTimeout
+        document.getElementById('text-display').textContent = ``;
+    }, 2000);
+})
+
+function customsetTimeout(callback, delay) {
+    const startD = Date.now();
+
+    const intervalId = setInterval(() => {
+        const endD = Date.now();
+        if (endD - startD >= delay) {
+            //endD = Date.now();
+            callback();
+            clearInterval(intervalId);
+        }
+    }, 1);
+}
+
+
+// 13. Rebuild setInterval() for periodic execution
+function timeInterval() {
+    let visible = true;
+    customsetInterval(() => { // setInterval
+        if (visible) {
+            document.getElementById('data-heading').textContent = '';
+        }
+        else {
+            document.getElementById('data-heading').textContent = 'Async Problems';
+        }
+        visible = !visible; // flip it for the next turn 
+        // cannot write false as it will work only 1 time 
+    }, 2000);
+}
+//timeInterval();
+
+function customsetInterval(callback, interval) {
+    function repeat() {
+        callback();
+        setTimeout(repeat, interval);
+    }
+    setTimeout(repeat, interval);
+}
+
+
+// 14. Design a clearAllTimers function to cancel all timeouts and intervals.
+const allTimeOut = [];
+const allInterval = [];
+
+// override setTimeout
+const originalTimeout = window.setTimeout;
+window.setTimeout = function (fun, delay) {
+    const id = originalTimeout(fun, delay);
+    allTimeOut.push(id);
+    return id;
+}
+
+// override setInterval
+const originalInterval = window.setInterval;
+window.setInterval = function (fun, delay) {
+    const id = originalInterval(fun, delay);
+    allInterval.push(id);
+    return id;
+}
+
+function clearAllTimers() {
+    allTimeOut.forEach(clearTimeout);
+    allInterval.forEach(clearInterval);
+    console.log('Interval Cleared');
+}
+
+function timeInterval() {
+    let visible = true;
+    const intervalId = setInterval(() => {
+        document.getElementById('data-heading').textContent = visible? '' : 'Async Problems';
+        visible = !visible;
+    }, 2000);
+    return intervalId;
+}
+
+const intervalId = timeInterval();
+setTimeout(function () {
+    clearInterval(intervalId);
+    
+    // if called below function, will stop all timer functions after 9 secs and we dont want that.
+  //  clearAllTimers();
+}, 9000);
