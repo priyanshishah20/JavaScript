@@ -353,3 +353,20 @@ setTimeout(function () {
     // if called below function, will stop all timer functions after 9 secs and we dont want that.
   //  clearAllTimers();
 }, 9000);
+
+// 15. create a debounce function to limit how often a task is executed
+function getDataFun() {
+    const data = document.getElementById('search-id').value;
+    console.log('fetching data..', data);
+}
+function debounce(fun, delay) {
+    let timer;
+    return function() {
+        let context = this, args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+            fun.apply(context, args);
+        }, delay);
+    }
+}
+const debounceFun = debounce(getDataFun, 300);
