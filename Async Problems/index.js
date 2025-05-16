@@ -354,6 +354,7 @@ setTimeout(function () {
   //  clearAllTimers();
 }, 9000);
 
+
 // 15. create a debounce function to limit how often a task is executed
 function getDataFun() {
     const data = document.getElementById('search-id').value;
@@ -370,3 +371,24 @@ function debounce(fun, delay) {
     }
 }
 const debounceFun = debounce(getDataFun, 300);
+
+
+// 16. Implement throttling to control te frequency of function calls
+function throttle(fun, delay) {
+    let lastCall = 0;
+
+    return function(...args) {
+        let now = new Date().getTime();
+
+        if(now - lastCall >= delay) {
+            lastCall = now;
+            fun.apply(this, args);
+        }
+    }
+}
+
+function logScroll() {
+    console.log('Scroll', new Date().toLocaleTimeString());
+}
+
+window.addEventListener('scroll', throttle(logScroll, 1000));
